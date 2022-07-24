@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    env_file:
+      - docker-compose.env
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: ./compose/app/Dockerfile
+    entrypoint: /entrypoint.sh
+    env_file:
+      - docker-compose.env
+    volumes:
+      - ./example/:/app/
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+
+volumes:
+  postgres-data:
