@@ -4,7 +4,7 @@ ARG TAG='latest'
 ARG DOCKER_IMAGE_NAME='ghcr.io/yothinix/earthly-thurstech'
 
 lint:
-  FROM DOCKERFILE .
+  FROM +build
   RUN flake8
 
 docker-compose:
@@ -54,6 +54,12 @@ release:
   BUILD +build
   BUILD +publish
 
-all:
-  BUILD +test
+verify:
   BUILD +migrate
+  BUILD +lint
+  BUILD +test
+  BUILD +validate
+
+all:
+  BUILD +verify
+  BUILD +release
