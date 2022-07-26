@@ -15,7 +15,7 @@ docker-compose:
   COPY docker-compose.yml ./docker-compose.yml
 
   RUN apk update
-  RUN apk add postgresql-client
+  RUN apk add postgresql-client curl
 
 test:
   FROM +docker-compose
@@ -31,6 +31,15 @@ migrate:
   WITH DOCKER --compose docker-compose.yml --load app:latest=+build
     RUN while ! pg_isready --host=localhost --port=5432; do sleep 1; done ; \
       docker compose exec app python manage.py migrate
+  END
+
+validate:
+  FROM +docker-compose
+  ARG HEALTHCHECK_URL='http://localhost:8000/ping/'
+
+  WITH DOCKER --compose docker-compose.yml --load app:latest=+build
+    RUN while ! pg_isready --host=localhost --port=5432; do sleep 1; done ; \
+      while ! curl -I --fail $HEALTHCHECK_URL; do sleep 1; done
   END
 
 build:
