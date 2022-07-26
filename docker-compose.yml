@@ -6,6 +6,8 @@ services:
     image: postgres:13
     env_file:
       - docker-compose.env
+    ports:
+      - 5432:5432
 
   app:
     container_name: example_app
