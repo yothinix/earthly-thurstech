@@ -7,18 +7,7 @@ lint:
   FROM DOCKERFILE .
   RUN flake8
 
-test:
-  FROM docker:20.10-dind
-
-  COPY ./example ./example
-  COPY docker-compose.env ./docker-compose.env
-  COPY docker-compose.yml ./docker-compose.yml
-
-  WITH DOCKER --compose docker-compose.yml
-    RUN docker compose exec app python manage.py test
-  END
-
-migrate:
+docker-compose:
   FROM docker:20.10-dind
 
   COPY ./example ./example
@@ -27,6 +16,17 @@ migrate:
 
   RUN apk update
   RUN apk add postgresql-client
+
+test:
+  FROM +docker-compose
+
+  WITH DOCKER --compose docker-compose.yml --load app:latest=+build
+    RUN while ! pg_isready --host=localhost --port=5432; do sleep 1; done ; \
+      docker compose exec app python manage.py test
+  END
+
+migrate:
+  FROM +docker-compose
 
   WITH DOCKER --compose docker-compose.yml --load app:latest=+build
     RUN while ! pg_isready --host=localhost --port=5432; do sleep 1; done ; \
@@ -44,3 +44,7 @@ publish:
 release:
   BUILD +build
   BUILD +publish
+
+all:
+  BUILD +test
+  BUILD +migrate
