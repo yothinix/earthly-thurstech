@@ -8,7 +8,7 @@ RUN echo "deb [arch=amd64] http://apt.postgresql.org/pub/repos/apt/ bullseye-pgd
     && apt-get update \
     && apt-get install -y postgresql-client-13
 
-COPY ./compose/app/entrypoint.sh /entrypoint.sh
+COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENV APPLICATION_ROOT /app
