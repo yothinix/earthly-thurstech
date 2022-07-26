@@ -9,9 +9,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   app:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: ghcr.io/yothinix/earthly-thurstech:latest
     entrypoint: /entrypoint.sh
     env_file:
       - docker-compose.env
