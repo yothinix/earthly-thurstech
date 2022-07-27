@@ -45,7 +45,7 @@ validate:
 build:
   FROM python:3.8
 
-  LABEL org.opencontainers.image.source https://github.com/yothinix/earthly-thurstech
+  LABEL org.opencontainers.image.source=https://github.com/yothinix/earthly-thurstech
 
   ENV PYTHONDONTWRITEBYTECODE 1
   ENV PYTHONUNBUFFERED 1
