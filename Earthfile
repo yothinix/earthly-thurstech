@@ -70,7 +70,7 @@ build:
   COPY ./example $APPLICATION_ROOT
   WORKDIR $APPLICATION_ROOT
 
-  SAVE IMAGE $DOCKER_IMAGE_NAME:$TAG
+  SAVE IMAGE --cache-hint
 
 publish:
   FROM +build
