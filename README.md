@@ -2,7 +2,7 @@
 This project is for demonstrate how to evolved from single Dockerfile to Earthfile on a simple Django/Python project with GitHub action as CI
 
 ## The demo
-* The Event video: TBA
+* The Event video: [Facebook Live](https://www.facebook.com/863132217039382/photos/a.946691332016803/1128336260518975) [YouTube Live](https://www.youtube.com/watch?v=-Sa7RH0146A)
 * All the demo code: [https://github.com/yothinix/earthly-thurstech](https://github.com/yothinix/earthly-thurstech)
 * The slide: [https://bit.ly/earthly-thurstech](https://bit.ly/earthly-thurstech)
 
