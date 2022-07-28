@@ -2,7 +2,9 @@
 This project is for demonstrate how to evolved from single Dockerfile to Earthfile on a simple Django/Python project with GitHub action as CI
 
 ## The demo
-When event is finish I will update the link here
+* The Event video: TBA
+* All the demo code: [https://github.com/yothinix/earthly-thurstech](https://github.com/yothinix/earthly-thurstech)
+* The slide: [https://bit.ly/earthly-thurstech](https://bit.ly/earthly-thurstech)
 
 ## Prerequisite
   * Docker runtime -- I recommend [colima](https://github.com/abiosoft/colima) alternative to [Docker Desktop](https://docs.docker.com/desktop/install/mac-install/), Please note that you need to enable buildkit via environment variable `DOCKER_BUILDKIT=1` 
